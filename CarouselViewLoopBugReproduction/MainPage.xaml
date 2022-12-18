@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CarouselViewLoopBugReproduction"
+             x:Class="CarouselViewLoopBugReproduction.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout Margin="20">
+        <!--<StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Center">
+            <Label Text="Enable Loop: "
+                   VerticalTextAlignment="Center" />
+            <Switch x:Name="loopSwitch"
+                    IsToggled="{Binding IsLoopEnabled, Mode=TwoWay}" />
+        </StackLayout>-->
+        <Button Text="Next"
+                Command="{Binding NextCommand}"/>
+        <CarouselView x:Name="carouselView"
+                      ItemsSource="{Binding Monkeys}"
+                      Loop="False"
+                      Position="{Binding Position}"
+                      Scrolled="OnCarouselViewScrolled">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame HasShadow="True"
+                               BorderColor="DarkGray"
+                               CornerRadius="5"
+                               Margin="20"
+                               HeightRequest="300"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" 
+                                       FontAttributes="Bold"
+                                       FontSize="20"
+                                       TextColor="Black"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                <Image Source="{Binding ImageUrl}" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="150"
+                                       WidthRequest="150"
+                                       HorizontalOptions="Center" />
+                                <Label Text="{Binding Location}"
+                                       TextColor="Black"
+                                       HorizontalOptions="Center" />
+                                <Label Text="{Binding Details}"
+                                       FontAttributes="Italic"
+                                       HorizontalOptions="Center"
+                                       MaxLines="5"
+                                       TextColor="Black"
+                                       />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+    </StackLayout>
+
+</ContentPage>
